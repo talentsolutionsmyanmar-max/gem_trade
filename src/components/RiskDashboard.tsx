@@ -285,7 +285,7 @@ function MetricCard({
   value: string;
   subValue: string;
   subColor?: string;
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
   alert?: boolean;
 }) {
   return (
