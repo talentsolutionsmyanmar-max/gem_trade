@@ -98,6 +98,36 @@ export function calculatePositionSize(
 }
 
 // ============================================================
+// FUNDING RATE FILTER
+// ============================================================
+
+export function checkFundingFilter(
+  fundingRate: number,
+  direction: 'LONG' | 'SHORT'
+): { allowed: boolean; reason?: string } {
+  // Convert to percentage
+  const fundingPct = fundingRate * 100;
+  
+  // Strict funding filter
+  if (direction === 'LONG' && fundingPct > 0.05) {
+    return { allowed: false, reason: `High long funding: ${fundingPct.toFixed(4)}%` };
+  }
+  if (direction === 'SHORT' && fundingPct < -0.05) {
+    return { allowed: false, reason: `High short funding: ${fundingPct.toFixed(4)}%` };
+  }
+  
+  // Extra favorable if funding is in our favor
+  if (direction === 'LONG' && fundingPct < -0.01) {
+    return { allowed: true, reason: 'Favorable funding' };
+  }
+  if (direction === 'SHORT' && fundingPct > 0.01) {
+    return { allowed: true, reason: 'Favorable funding' };
+  }
+  
+  return { allowed: true };
+}
+
+// ============================================================
 // DAILY/WEEKLY LIMITS
 // ============================================================
 
