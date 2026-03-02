@@ -144,7 +144,7 @@ export async function GET(request: Request) {
             klines15m,
             fundingRates[symbol] || 0,
             klines1h,
-            null // 4h optional
+            undefined // 4h optional
           );
           
           if (!signal) {
