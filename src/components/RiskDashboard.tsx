@@ -6,6 +6,7 @@
 
 import { useEffect, useState } from 'react';
 import { useTradingStore } from '@/lib/store';
+import type { LucideIcon } from 'lucide-react';
 import { 
   Shield, 
   AlertTriangle, 
@@ -285,7 +286,7 @@ function MetricCard({
   value: string;
   subValue: string;
   subColor?: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: LucideIcon;
   alert?: boolean;
 }) {
   return (
