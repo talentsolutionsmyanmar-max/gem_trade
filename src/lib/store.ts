@@ -381,6 +381,7 @@ export const useTradingStore = create<TradingState>()(
             pnl: t.pnl || 0,
             pnlPercent: t.pnlPercent || 0,
             exitPrice: t.exitPrice || 0,
+            exitTime: t.exitTime || 0,
             riskReward: 0,
             grade: (t.grade || 'A') as 'A+' | 'A' | 'B+' | 'B' | 'C',
             outcome: ((t.pnl || 0) > 0 ? 'WIN' : 'LOSS') as 'WIN' | 'LOSS' | 'BREAKEVEN',
@@ -484,10 +485,13 @@ export const useTradingStore = create<TradingState>()(
           ...t,
           pnl: t.pnl || 0,
           pnlPercent: t.pnlPercent || 0,
+          exitPrice: t.exitPrice || 0,
+          exitTime: t.exitTime || 0,
           riskReward: 0,
-          outcome: (t.pnl || 0) > 0 ? 'WIN' : 'LOSS',
-          exitReason: t.exitReason || 'SL',
-          criteriaScores: t.preTradeCheck?.validation?.criteriaScores || {
+          grade: (t.grade || 'A') as 'A+' | 'A' | 'B+' | 'B' | 'C',
+          outcome: ((t.pnl || 0) > 0 ? 'WIN' : 'LOSS') as 'WIN' | 'LOSS' | 'BREAKEVEN',
+          exitReason: (t.exitReason || 'SL') as 'TP1' | 'TP2' | 'TP3' | 'SL' | 'TIME',
+          criteriaScores: {
             killzoneActive: true, htfAlignment: true, mssConfirmed: true,
             obFvgConfluence: true, liquiditySwept: true, rsiFavorable: true,
             macdAlignment: true, volumeConfirmation: true
@@ -547,10 +551,13 @@ export const useTradingStore = create<TradingState>()(
             ...t,
             pnl: t.pnl || 0,
             pnlPercent: t.pnlPercent || 0,
+            exitPrice: t.exitPrice || 0,
+            exitTime: t.exitTime || 0,
             riskReward: 0,
-            outcome: (t.pnl || 0) > 0 ? 'WIN' : 'LOSS',
-            exitReason: t.exitReason || 'SL',
-            criteriaScores: t.preTradeCheck?.validation?.criteriaScores || {
+            grade: (t.grade || 'A') as 'A+' | 'A' | 'B+' | 'B' | 'C',
+            outcome: ((t.pnl || 0) > 0 ? 'WIN' : 'LOSS') as 'WIN' | 'LOSS' | 'BREAKEVEN',
+            exitReason: (t.exitReason || 'SL') as 'TP1' | 'TP2' | 'TP3' | 'SL' | 'TIME',
+            criteriaScores: {
               killzoneActive: true, htfAlignment: true, mssConfirmed: true,
               obFvgConfluence: true, liquiditySwept: true, rsiFavorable: true,
               macdAlignment: true, volumeConfirmation: true
