@@ -2,7 +2,8 @@
 // Capital Protection First, Profits Second
 // Powered by Ko Htike + Kimi Claw
 
-import type { Signal, BacktestTrade } from '@/types/trading';
+import type { Signal } from '@/types/trading';
+import type { BacktestTrade } from './backtest';
 
 // ============================================================
 // RISK CONFIGURATION
