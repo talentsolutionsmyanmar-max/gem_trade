@@ -206,7 +206,7 @@ export async function runBacktestForPair(
     
     // Calculate grade
     const criteriaScores = {
-      killzoneActive: killzone !== 'NONE',
+      killzoneActive: true, // Already filtered above (killzone !== 'NONE')
       htfAlignment: ema20 > ema50 ? direction === 'LONG' : direction === 'SHORT',
       mssConfirmed: direction === 'LONG' ? mss.bullish : mss.bearish,
       obFvgConfluence: direction === 'LONG' ? !!(ob.bullish || fvg.bullish) : !!(ob.bearish || fvg.bearish),
