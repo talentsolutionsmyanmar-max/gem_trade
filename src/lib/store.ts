@@ -381,8 +381,9 @@ export const useTradingStore = create<TradingState>()(
             pnl: t.pnl || 0,
             pnlPercent: t.pnlPercent || 0,
             riskReward: 0,
-            outcome: (t.pnl || 0) > 0 ? 'WIN' : 'LOSS',
-            exitReason: t.exitReason || 'SL',
+            grade: (t.grade || 'A') as 'A+' | 'A' | 'B+' | 'B' | 'C',
+            outcome: ((t.pnl || 0) > 0 ? 'WIN' : 'LOSS') as 'WIN' | 'LOSS' | 'BREAKEVEN',
+            exitReason: (t.exitReason || 'SL') as 'TP1' | 'TP2' | 'TP3' | 'SL' | 'TIME',
             criteriaScores: {
               killzoneActive: true,
               htfAlignment: true,
