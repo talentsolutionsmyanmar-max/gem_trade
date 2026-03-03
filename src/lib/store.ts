@@ -380,6 +380,7 @@ export const useTradingStore = create<TradingState>()(
             ...t,
             pnl: t.pnl || 0,
             pnlPercent: t.pnlPercent || 0,
+            exitPrice: t.exitPrice || 0,
             riskReward: 0,
             grade: (t.grade || 'A') as 'A+' | 'A' | 'B+' | 'B' | 'C',
             outcome: ((t.pnl || 0) > 0 ? 'WIN' : 'LOSS') as 'WIN' | 'LOSS' | 'BREAKEVEN',
