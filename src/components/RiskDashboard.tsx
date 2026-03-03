@@ -6,7 +6,6 @@
 
 import { useEffect, useState } from 'react';
 import { useTradingStore } from '@/lib/store';
-import type { LucideIcon } from 'lucide-react';
 import { 
   Shield, 
   AlertTriangle, 
@@ -55,7 +54,7 @@ export function RiskDashboard() {
   // Calculate risk exposure
   const totalRisk = trades
     .filter(t => t.status === 'OPEN')
-    .reduce((sum, t) => sum + t.riskAmount, 0);
+    .reduce((sum, t) => sum + (t.riskAmount || 0), 0);
   
   const riskPercent = (totalRisk / accountBalance) * 100;
   
@@ -117,7 +116,7 @@ export function RiskDashboard() {
           alert={openPositions >= riskConfig.maxPositions}
         />
         
-        㰼MetricCard
+        <MetricCard
           title="Win Rate"
           value={`${performanceMetrics.winRate.toFixed(1)}%`}
           subValue={`${performanceMetrics.totalTrades} trades`}
@@ -131,7 +130,7 @@ export function RiskDashboard() {
         <h3 className="text-sm font-medium text-gray-300">Risk Limits</h3>
         
         {/* Daily Loss Limit */}
-        㰼LimitBar
+        <LimitBar
           label="Daily Loss Limit"
           current={Math.abs(tradingLimits.dailyPnLPercent)}
           max={riskConfig.maxDailyLoss * 100}
@@ -286,7 +285,7 @@ function MetricCard({
   value: string;
   subValue: string;
   subColor?: string;
-  icon: React.ElementType;
+  icon: React.ComponentType<{ className?: string }>;
   alert?: boolean;
 }) {
   return (
