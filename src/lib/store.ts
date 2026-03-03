@@ -301,8 +301,8 @@ export const useTradingStore = create<TradingState>()(
         if (signal.grade === 'A+') {
           set((s) => ({
             alerts: [{
-              type: 'SIGNAL',
-              priority: 'HIGH',
+              type: 'SIGNAL' as const,
+              priority: 'HIGH' as const,
               title: 'A+ Signal Detected',
               message: `${signal.symbol} ${signal.direction} - ${signal.killzone}`,
               timestamp: Date.now(),
@@ -401,8 +401,8 @@ export const useTradingStore = create<TradingState>()(
           // Add risk alert
           set((s) => ({
             alerts: [{
-              type: 'RISK',
-              priority: 'HIGH',
+              type: 'RISK' as const,
+              priority: 'HIGH' as const,
               title: 'Trade Blocked',
               message: check.errors[0] || 'Risk check failed',
               timestamp: Date.now()
@@ -439,8 +439,8 @@ export const useTradingStore = create<TradingState>()(
         set((s) => ({
           trades: [trade, ...s.trades],
           alerts: [{
-            type: 'TRADE',
-            priority: 'MEDIUM',
+            type: 'TRADE' as const,
+            priority: 'MEDIUM' as const,
             title: 'Trade Executed',
             message: `${signal.symbol} ${signal.direction} @ ${currentPrice}`,
             timestamp: Date.now(),
@@ -496,16 +496,16 @@ export const useTradingStore = create<TradingState>()(
         const alerts = [...state.alerts];
         if (pnlPercent <= -2) {
           alerts.unshift({
-            type: 'RISK',
-            priority: 'HIGH',
+            type: 'RISK' as const,
+            priority: 'HIGH' as const,
             title: 'Trade Loss',
             message: `${trade.symbol} stopped out. Loss: ${pnlPercent.toFixed(2)}%`,
             timestamp: Date.now()
           });
         } else if (pnlPercent >= 3) {
           alerts.unshift({
-            type: 'PERFORMANCE',
-            priority: 'MEDIUM',
+            type: 'PERFORMANCE' as const,
+            priority: 'MEDIUM' as const,
             title: 'Trade Win',
             message: `${trade.symbol} hit ${reason}. Profit: ${pnlPercent.toFixed(2)}%`,
             timestamp: Date.now()
